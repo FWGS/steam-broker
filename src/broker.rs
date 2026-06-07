@@ -93,15 +93,14 @@ pub struct Broker {
 }
 
 impl Broker {
-    pub fn new() -> Result<Self, BrokerError> {
+    pub fn new(addr: &str) -> Result<Self, BrokerError> {
         let scratch = ScratchDir::new()?;
         std::env::set_current_dir(scratch.path()).map_err(BrokerError::Io)?;
         println!("Scratch directory: {}", scratch.path().display());
 
-        let addr = "127.0.0.1:27420";
         let listener = TcpListener::bind(addr).map_err(BrokerError::CreateSocket)?;
         listener.set_nonblocking(true)?;
-        println!("Started TCP server at {addr}");
+        println!("Started TCP server at {}", listener.local_addr()?);
 
         Ok(Self {
             listener,

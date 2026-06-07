@@ -8,6 +8,8 @@ use thiserror::Error;
 
 use crate::broker::Broker;
 
+const DEFAULT_LISTEN: &str = "127.0.0.1:27420";
+
 #[derive(Error, Debug)]
 enum BrokerError {
     #[error("steam api error, {0}")]
@@ -31,7 +33,11 @@ enum BrokerError {
 fn main() {
     println!("Welcome to Steam Broker!");
 
-    match Broker::new() {
+    let addr = std::env::args()
+        .nth(1)
+        .unwrap_or_else(|| DEFAULT_LISTEN.to_string());
+
+    match Broker::new(&addr) {
         Ok(mut broker) => {
             if let Err(err) = broker.run() {
                 println!("error: {err:?}");
