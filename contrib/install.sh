@@ -64,7 +64,7 @@ install -v -Dm755 "$LIB_SRC" "$LIB_DIR/libsteam_api.so"
 
 echo "Installing user unit into $UNIT_DIR..."
 mkdir -pv "$UNIT_DIR"
-sed "s|^ExecStart=.*|ExecStart=$PREFIX/bin/steam-broker|" "$SCRIPT_DIR/$UNIT_NAME" > "$UNIT_DIR/$UNIT_NAME"
+sed "s|^ExecStart=[^ ]*/steam-broker|ExecStart=$PREFIX/bin/steam-broker|" "$SCRIPT_DIR/$UNIT_NAME" > "$UNIT_DIR/$UNIT_NAME"
 chmod 0644 "$UNIT_DIR/$UNIT_NAME"
 
 systemctl --user daemon-reload
