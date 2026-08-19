@@ -7,3 +7,4 @@ edition = "2024"
 fastrand = "2"
 thiserror = "2"
 steamworks = { rev = "1ca2867", git = "https://github.com/a1batross/steamworks-rs" }
+png = "0.18.1"
