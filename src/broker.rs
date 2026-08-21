@@ -25,7 +25,7 @@ const RESPONSE_HEADER: &[u8] = b"sb_connect\n";
 const PLAYER_RESPONSE_HEADER: &[u8] = b"sb_playerx\n";
 
 const AVATAR_SIZE: u32 = 32;
-const AVATAR_PENDING_TIMEOUT: Duration = Duration::from_secs(1);
+const AVATAR_PENDING_TIMEOUT: Duration = Duration::from_millis(100); // 0.1s
 
 const PLAYER_FIELD_NAME: u32 = 1 << 0;
 const PLAYER_FIELD_AVATAR_SMALL: u32 = 1 << 1;
